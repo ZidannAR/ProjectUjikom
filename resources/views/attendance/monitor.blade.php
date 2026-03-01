@@ -10,7 +10,7 @@
     
     <div id="qrcode" style="margin: 20px;"></div>
     
-    <p>QR diperbarui dalam: <span id="timer">5</span> detik</p>
+    <p>QR diperbarui dalam: <span id="timer">30</span> detik</p>
 
     <script>
         // Inisialisasi library QR
@@ -25,6 +25,7 @@
             fetch('/api/get-new-token')
                 .then(res => res.json())
                 .then(data => {
+                    qrcode.clear(); 
                     // Update gambar QR dengan token baru
                     qrcode.makeCode(data.token);
                     console.log("Token Updated: " + data.token);
@@ -32,13 +33,13 @@
                 .catch(err => console.error("Gagal ambil token:", err));
         }
 
-        let timeLeft = 5;
+        let timeLeft = 30;
         setInterval(() => {
             timeLeft--;
             document.getElementById('timer').innerText = timeLeft;
             if(timeLeft <= 0) {
                 updateQR(); // Ambil token baru setiap 5 detik
-                timeLeft = 5;
+                timeLeft = 30;
             }
         }, 1000);
 

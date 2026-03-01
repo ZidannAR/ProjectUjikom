@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\{Attendance, AttendanceLog, Employee};
@@ -12,12 +12,16 @@ class AttendanceController extends Controller
     {
         $secret = config('app.qr_secret_key');
 
-        $window = 10000; // HARUS sama dengan validator
+        $window = 100;
         $timestamp = floor(time() / $window);
 
-        $qrToken = hash_hmac('sha256', $timestamp, $secret);
+        $token = hash_hmac('sha256', $timestamp, $secret);
 
-        return view('attendance.monitor', compact('qrToken'));
+        return response()->json([
+            'token' => $token,
+            'expires_in' => $window - (time() % $window),
+            'server_time' => now()->toDateTimeString()
+        ]);
     }
     public function scan(Request $request)
     {
@@ -30,9 +34,47 @@ class AttendanceController extends Controller
                 'message' => "Karyawan {$employee->full_name} tidak memiliki shift."
             ], 400);
         }
+        // ===== VALIDASI JAM SHIFT =====
+        // ===== VALIDASI SHIFT & TANGGAL =====
+        $now = now();
+        $currentTime = $now->format('H:i:s');
 
+        $shiftStart = $employee->shift->start_time;
+        $shiftEnd   = $employee->shift->end_time;
+
+        // ===== CEK APAKAH SHIFT MALAM (LEWAT TANGGAL) =====
+        $isOvernightShift = $shiftStart > $shiftEnd;
+
+        if ($isOvernightShift) {
+
+            // ===== SHIFT MALAM =====
+            if ($currentTime >= $shiftStart || $currentTime <= $shiftEnd) {
+
+                // Jika setelah tengah malam → tanggal kemarin
+                if ($currentTime <= $shiftEnd) {
+                    $workDate = $now->copy()->subDay()->toDateString();
+                } else {
+                    $workDate = $now->toDateString();
+                }
+            } else {
+                return response()->json([
+                    'message' => 'Tidak bisa absen karena bukan shift anda.'
+                ], 403);
+            }
+        } else {
+
+            // ===== SHIFT PAGI & SIANG =====
+            if ($currentTime >= $shiftStart && $currentTime <= $shiftEnd) {
+
+                $workDate = $now->toDateString();
+            } else {
+                return response()->json([
+                    'message' => 'Tidak bisa absen karena bukan shift anda.'
+                ], 403);
+            }
+        }
         // ===== 2. VALIDASI QR DINAMIS =====
-        $window = 10000; // QR ganti tiap 30 detikx
+        $window = 100; // QR ganti tiap 30 detikx
         $timestamp = floor(time() / $window);
 
         $secret = config('app.qr_secret_key');
