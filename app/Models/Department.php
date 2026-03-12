@@ -11,4 +11,8 @@ class Department extends Model
     public function officeLocation() {
         return $this->belongsTo(OfficeLocation::class);
     }
+
+    public function employees() {
+        return $this->hasMany(Employee::class);
+    }
 }

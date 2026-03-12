@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo; // Tambahkan ini
 use Illuminate\Database\Eloquent\Relations\HasMany;  // Tambahkan ini
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Employee extends Model
 {
@@ -43,5 +44,38 @@ class Employee extends Model
     public function leaveRequests(): HasMany
     {
         return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function employeeDetail()
+    {
+        return $this->hasOne(EmployeeDetail::class);
+    }
+
+    /**
+     * Cek apakah profil karyawan sudah lengkap
+     */
+    public function isProfileComplete(): bool
+    {
+        $detail = $this->employeeDetail;
+        if (!$detail) return false;
+
+        $required = ['nik', 'birth_place', 'birth_date', 'gender', 'phone', 'address', 'join_date'];
+        foreach ($required as $field) {
+            if (empty($detail->$field)) return false;
+        }
+        return true;
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class);
+    }
+
+    /**
+     * Penilaian karyawan ini (via evaluatee_id)
+     */
+    public function assessments(): HasMany
+    {
+        return $this->hasMany(Assessment::class, 'evaluatee_id');
     }
 }

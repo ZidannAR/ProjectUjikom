@@ -1,0 +1,56 @@
+﻿
+  GET|HEAD        / ........................................................................................................ AttendanceController@generateToken
+  GET|HEAD        admin/attendance-logs ..................................................... admin.attendance-logs.index ÔÇ║ Admin\AttendanceLogController@index
+  GET|HEAD        admin/attendance-report .............................................. admin.attendance-report.index ÔÇ║ Admin\AttendanceReportController@index
+  GET|HEAD        admin/attendance-report/export-excel .................... admin.attendance-report.export-excel ÔÇ║ Admin\AttendanceReportController@exportExcel
+  GET|HEAD        admin/attendance-report/export-pdf .......................... admin.attendance-report.export-pdf ÔÇ║ Admin\AttendanceReportController@exportPdf
+  GET|HEAD        admin/dashboard ........................................................................... admin.dashboard ÔÇ║ Admin\DashboardController@index
+  GET|HEAD        admin/departments ................................................................ admin.departments.index ÔÇ║ Admin\DepartmentController@index
+  POST            admin/departments ................................................................ admin.departments.store ÔÇ║ Admin\DepartmentController@store
+  GET|HEAD        admin/departments/create ....................................................... admin.departments.create ÔÇ║ Admin\DepartmentController@create
+  GET|HEAD        admin/departments/{department} ..................................................... admin.departments.show ÔÇ║ Admin\DepartmentController@show
+  PUT|PATCH       admin/departments/{department} ................................................. admin.departments.update ÔÇ║ Admin\DepartmentController@update
+  DELETE          admin/departments/{department} ............................................... admin.departments.destroy ÔÇ║ Admin\DepartmentController@destroy
+  GET|HEAD        admin/departments/{department}/edit ................................................ admin.departments.edit ÔÇ║ Admin\DepartmentController@edit
+  GET|HEAD        admin/employees ...................................................................... admin.employees.index ÔÇ║ Admin\EmployeeController@index
+  POST            admin/employees ...................................................................... admin.employees.store ÔÇ║ Admin\EmployeeController@store
+  GET|HEAD        admin/employees/create ............................................................. admin.employees.create ÔÇ║ Admin\EmployeeController@create
+  GET|HEAD        admin/employees/{employee} ............................................................. admin.employees.show ÔÇ║ Admin\EmployeeController@show
+  PUT|PATCH       admin/employees/{employee} ......................................................... admin.employees.update ÔÇ║ Admin\EmployeeController@update
+  DELETE          admin/employees/{employee} ....................................................... admin.employees.destroy ÔÇ║ Admin\EmployeeController@destroy
+  GET|HEAD        admin/employees/{employee}/edit ........................................................ admin.employees.edit ÔÇ║ Admin\EmployeeController@edit
+  POST            admin/employees/{employee}/reset-device ................................. admin.employees.reset-device ÔÇ║ Admin\EmployeeController@resetDevice
+  GET|HEAD        admin/holidays ......................................................................... admin.holidays.index ÔÇ║ Admin\HolidayController@index
+  POST            admin/holidays ......................................................................... admin.holidays.store ÔÇ║ Admin\HolidayController@store
+  GET|HEAD        admin/holidays/create ................................................................ admin.holidays.create ÔÇ║ Admin\HolidayController@create
+  GET|HEAD        admin/holidays/{holiday} ................................................................. admin.holidays.show ÔÇ║ Admin\HolidayController@show
+  PUT|PATCH       admin/holidays/{holiday} ............................................................. admin.holidays.update ÔÇ║ Admin\HolidayController@update
+  DELETE          admin/holidays/{holiday} ........................................................... admin.holidays.destroy ÔÇ║ Admin\HolidayController@destroy
+  GET|HEAD        admin/holidays/{holiday}/edit ............................................................ admin.holidays.edit ÔÇ║ Admin\HolidayController@edit
+  GET|HEAD        admin/leave-requests ........................................................ admin.leave-requests.index ÔÇ║ Admin\LeaveRequestController@index
+  PATCH           admin/leave-requests/{leaveRequest}/approve ............................. admin.leave-requests.approve ÔÇ║ Admin\LeaveRequestController@approve
+  PATCH           admin/leave-requests/{leaveRequest}/reject ................................ admin.leave-requests.reject ÔÇ║ Admin\LeaveRequestController@reject
+  GET|HEAD        admin/leave-requests/{leave_request} .......................................... admin.leave-requests.show ÔÇ║ Admin\LeaveRequestController@show
+  GET|HEAD        admin/office-locations .................................................. admin.office-locations.index ÔÇ║ Admin\OfficeLocationController@index
+  POST            admin/office-locations .................................................. admin.office-locations.store ÔÇ║ Admin\OfficeLocationController@store
+  GET|HEAD        admin/office-locations/create ......................................... admin.office-locations.create ÔÇ║ Admin\OfficeLocationController@create
+  GET|HEAD        admin/office-locations/{office_location} .................................. admin.office-locations.show ÔÇ║ Admin\OfficeLocationController@show
+  PUT|PATCH       admin/office-locations/{office_location} .............................. admin.office-locations.update ÔÇ║ Admin\OfficeLocationController@update
+  DELETE          admin/office-locations/{office_location} ............................ admin.office-locations.destroy ÔÇ║ Admin\OfficeLocationController@destroy
+  GET|HEAD        admin/office-locations/{office_location}/edit ............................. admin.office-locations.edit ÔÇ║ Admin\OfficeLocationController@edit
+  GET|HEAD        admin/shifts ............................................................................... admin.shifts.index ÔÇ║ Admin\ShiftController@index
+  POST            admin/shifts ............................................................................... admin.shifts.store ÔÇ║ Admin\ShiftController@store
+  GET|HEAD        admin/shifts/create ...................................................................... admin.shifts.create ÔÇ║ Admin\ShiftController@create
+  GET|HEAD        admin/shifts/{shift} ......................................................................... admin.shifts.show ÔÇ║ Admin\ShiftController@show
+  PUT|PATCH       admin/shifts/{shift} ..................................................................... admin.shifts.update ÔÇ║ Admin\ShiftController@update
+  DELETE          admin/shifts/{shift} ................................................................... admin.shifts.destroy ÔÇ║ Admin\ShiftController@destroy
+  GET|HEAD        admin/shifts/{shift}/edit .................................................................... admin.shifts.edit ÔÇ║ Admin\ShiftController@edit
+  POST            api/attendance/scan ........................................................................................... Api\AttendanceController@scan
+  GET|HEAD        api/get-new-token .................................................................................... Api\AttendanceController@generateToken
+  GET|HEAD        api/user .................................................................................................................................... 
+  GET|HEAD        sanctum/csrf-cookie ....................................................... sanctum.csrf-cookie ÔÇ║ Laravel\Sanctum ÔÇ║ CsrfCookieController@show
+  GET|HEAD        storage/{path} ................................................................................................................ storage.local
+  GET|HEAD        up .......................................................................................................................................... 
+
+                                                                                                                                            Showing [52] routes
+
